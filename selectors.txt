@@ -1,0 +1,18 @@
+1.
+- By.id = driver.findElement(By.id("moneyRate"));
+Screenshot - https://snipboard.io/3ATSyh.jpg
+- By.name = driver.findElement(By.name("charset"));
+Screenshot - https://snipboard.io/e7xAGZ.jpg
+- By.className = driver.findElement(By.className("responsive-layout"));
+Screenshot - https://snipboard.io/ZvT7X5.jpg
+- By.TagName = driver.findElement(By.tagName("iframe"));
+Screenshot - https://snipboard.io/USbxqL.jpg
+- By.LinkText = driver.findElement(By.linkText("В Минске остановили нетрезвого иностранца за рулем"));
+Screenshot - https://snipboard.io/A72i3M.jpg
+- By.PartialLinkText = driver.findElement(By.partialLinkText("В Минске остановили"));
+Screenshot - https://snipboard.io/A72i3M.jpg
+- By.cssSelector = driver.findElement(By.cssSelector("#fast-search"));
+Screenshot - https://snipboard.io/U54ekd.jpg
+
+2.
+//*[@id='table1']//td[text()='fbach@yahoo.com']/following-sibling::td[1]
