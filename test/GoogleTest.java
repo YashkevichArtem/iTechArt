@@ -49,7 +49,6 @@ public class GoogleTest {
         int resultStatsQuantity = 0;
 
         while (matcher.find()) {
-            //System.out.println("Full match: " + matcher.group(0));
             String resultFirst = matcher.group(1).replaceAll("\\s+","");
             System.out.println("Количество результатов - " + resultFirst);
             System.out.println("Время на поиск: " + matcher.group(2) + " " + matcher.group(3));
