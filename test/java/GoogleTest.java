@@ -11,6 +11,7 @@ import org.testng.annotations.Test;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.List;
 import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -50,8 +51,8 @@ public class GoogleTest {
 
         while (matcher.find()) {
             String resultFirst = matcher.group(1).replaceAll("\\s+","");
-            System.out.println("Количество результатов - " + resultFirst);
-            System.out.println("Время на поиск: " + matcher.group(2) + " " + matcher.group(3));
+            System.out.println("Number of results - " + resultFirst);
+            System.out.println("Time to search: " + matcher.group(2) + " sek.");
             resultStatsQuantity = Integer.parseInt(resultFirst);
         }
         int resultsNumber = Integer.parseInt(properties.getProperty("resultsNumber"));
@@ -63,7 +64,8 @@ public class GoogleTest {
     }
 
     private void checkResults(String textToSearch) {
-        int elementsQuantity = driver.findElements(By.xpath("//div[@class='g']")).size();
+        List<WebElement> elements = driver.findElements(By.xpath("//div[@class='g']"));
+        int elementsQuantity = elements.size();
         for (int i = 0; i<elementsQuantity; i++){
             String textElement = driver.findElements(By.xpath("//div[@class='g']")).get(i).getText().toLowerCase();
             Assert.assertTrue(textElement.contains(textToSearch.toLowerCase()));
