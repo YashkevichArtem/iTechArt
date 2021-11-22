@@ -23,8 +23,6 @@ public class GoogleTest {
     public void setupClass() {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
-//        WebDriverManager.firefoxdriver().setup();
-//        driver = new FirefoxDriver();
     }
 
     @AfterTest
