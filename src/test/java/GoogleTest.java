@@ -36,7 +36,7 @@ public class GoogleTest {
     @Test
     void test() throws IOException {
         Properties properties = new Properties();
-        properties.load(new FileInputStream("test/resources/google.properties"));
+        properties.load(new FileInputStream("src/test/resources/google.properties"));
         driver.get("https://www.google.com/?hl=ru");
         String textToSearch = properties.getProperty("textToSearch");
         WebElement webElement = driver.findElement(By.name("q"));
@@ -47,16 +47,15 @@ public class GoogleTest {
 
         final Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
         final Matcher matcher = pattern.matcher(textResultStats);
-        int resultStatsQuantity = 0;
 
         while (matcher.find()) {
             String resultFirst = matcher.group(1).replaceAll("\\s+","");
-            System.out.println("Number of results - " + resultFirst);
+            int resultStatsQuantity = Integer.parseInt(resultFirst);
+            System.out.println("Number of results - " + resultStatsQuantity);
             System.out.println("Time to search: " + matcher.group(2) + " sek.");
-            resultStatsQuantity = Integer.parseInt(resultFirst);
+            int resultsNumber = Integer.parseInt(properties.getProperty("resultsNumber"));
+            Assert.assertTrue(resultsNumber<resultStatsQuantity);
         }
-        int resultsNumber = Integer.parseInt(properties.getProperty("resultsNumber"));
-        Assert.assertTrue(resultsNumber<resultStatsQuantity);
 
         checkResults(textToSearch);
         driver.findElement(By.xpath("//span[text()='Следующая']")).click();
