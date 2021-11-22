@@ -36,7 +36,7 @@ public class GoogleTest {
     void test() throws IOException {
         Properties properties = new Properties();
         properties.load(new FileInputStream("test/resources/google.properties"));
-        driver.get("https://www.google.com/");
+        driver.get("https://www.google.com/?hl=ru");
         String textToSearch = properties.getProperty("textToSearch");
         WebElement webElement = driver.findElement(By.name("q"));
         webElement.sendKeys(textToSearch);
@@ -49,8 +49,10 @@ public class GoogleTest {
         int resultStatsQuantity = 0;
 
         while (matcher.find()) {
-            System.out.println("Full match: " + matcher.group(0));
+            //System.out.println("Full match: " + matcher.group(0));
             String resultFirst = matcher.group(1).replaceAll("\\s+","");
+            System.out.println("Количество результатов - " + resultFirst);
+            System.out.println("Время на поиск: " + matcher.group(2) + " " + matcher.group(3));
             resultStatsQuantity = Integer.parseInt(resultFirst);
         }
         int resultsNumber = Integer.parseInt(properties.getProperty("resultsNumber"));
