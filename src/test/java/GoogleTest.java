@@ -4,9 +4,11 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import java.io.FileInputStream;
@@ -17,14 +19,19 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class GoogleTest {
-
+//
     private WebDriver driver;
 
     @BeforeClass
-    public void setupClass() {
+    public void setupChromeDriver() {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
     }
+//    @BeforeClass
+//    public void setupFirefoxDriver() {
+//        WebDriverManager.firefoxdriver().setup();
+//        driver = new ChromeDriver();
+//    }
 
     @AfterTest
     public void teardown() {
@@ -58,7 +65,7 @@ public class GoogleTest {
         }
 
         checkResults(textToSearch);
-        driver.findElement(By.xpath("//span[text()='Следующая']")).click();
+        driver.findElement(By.xpath("//a[@aria-label='Page 2']")).click();
         checkResults(textToSearch);
     }
 
@@ -70,4 +77,5 @@ public class GoogleTest {
             Assert.assertTrue(textElement.contains(textToSearch.toLowerCase()));
         }
     }
+
 }
